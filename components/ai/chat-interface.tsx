@@ -36,9 +36,7 @@ type ChatMessage = {
   role: "user" | "assistant";
 };
 
-const models = [
-  { id: "gemini-2.5-flash", name: "Gemini 2.5 Flash" }
-];
+const models = [{ id: "gemini-2.5-flash", name: "Gemini 2.5 Flash" }];
 
 interface ChatInterfaceProps {
   className?: string;

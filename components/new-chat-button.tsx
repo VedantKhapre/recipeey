@@ -4,12 +4,21 @@ import { useRouter } from "next/navigation";
 import { PenSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { nanoid } from "nanoid";
+import { saveChat } from "@/lib/chat-storage";
 
 export function NewChatButton() {
   const router = useRouter();
 
   const handleNewChat = () => {
     const newChatId = nanoid();
+    const newChat = {
+      id: newChatId,
+      title: "New Chat",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    saveChat(newChat);
     router.push(`/dashboard/chat/${newChatId}`);
   };
 
