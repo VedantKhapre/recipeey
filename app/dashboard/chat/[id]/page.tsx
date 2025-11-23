@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/app-sidebar";
+import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { ChatInterface } from "@/components/ai/chat-interface";
 import {
   Breadcrumb,
@@ -14,6 +14,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { UserButton } from "@clerk/nextjs";
 
 const topicMap: Record<string, { category: string; title: string }> = {
   "getting-started": {
@@ -66,6 +67,15 @@ export default async function ChatPage({
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
+          <div className="ml-auto">
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "size-8",
+                },
+              }}
+            />
+          </div>
         </header>
         <div className="flex flex-1 flex-col p-4 overflow-hidden">
           <div className="flex-1 overflow-hidden">

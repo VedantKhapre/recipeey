@@ -30,6 +30,7 @@ import { MODELS, DEFAULT_MODEL } from "@/lib/models";
 import { MicIcon, PaperclipIcon, RotateCcwIcon } from "lucide-react";
 import { nanoid } from "nanoid";
 import { type FormEventHandler, useCallback, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 
 type ChatMessage = {
   id: string;
@@ -46,6 +47,7 @@ export function ChatInterface({
   className,
   showHeader = true,
 }: ChatInterfaceProps) {
+  const { user } = useUser();
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: nanoid(),
@@ -212,10 +214,12 @@ export function ChatInterface({
                 <MessageAvatar
                   src={
                     message.role === "user"
-                      ? "https://github.com/shadcn.png"
+                      ? user?.imageUrl || "https://github.com/shadcn.png"
                       : "https://github.com/vercel.png"
                   }
-                  name={message.role === "user" ? "User" : "AI"}
+                  name={
+                    message.role === "user" ? user?.fullName || "User" : "AI"
+                  }
                 />
               </Message>
             </div>

@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Coffee } from "lucide-react";
+import { UserButton } from "@clerk/nextjs";
 
-import { NewChatButton } from "@/components/new-chat-button";
-import { ChatHistory } from "@/components/chat-history";
-import { DeleteAllChatsButton } from "@/components/delete-all-chats-button";
-import { SidebarOptInForm } from "@/components/sidebar-opt-in-form";
+import { NewChatButton } from "@/components/sidebar/new-chat-button";
+import { ChatHistory } from "@/components/sidebar/chat-history";
+import { DeleteAllChatsButton } from "@/components/sidebar/delete-all-chats-button";
+import { SidebarOptInForm } from "@/components/sidebar/sidebar-opt-in-form";
 import {
   Sidebar,
   SidebarContent,
@@ -43,7 +44,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <ChatHistory />
       </SidebarContent>
       <SidebarFooter>
-        <div className="p-1">
+        <div className="p-1 space-y-2">
           <SidebarOptInForm />
         </div>
       </SidebarFooter>

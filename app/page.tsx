@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Zap } from "lucide-react";
+import { SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Home() {
   return (
@@ -30,13 +31,26 @@ export default function Home() {
           cooking!
         </p>
 
-        <Button
-          size="lg"
-          className="bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 text-base px-8 h-12"
-          asChild
-        >
-          <a href="/dashboard">Start Cooking</a>
-        </Button>
+        <SignedOut>
+          <SignUpButton mode="modal">
+            <Button
+              size="lg"
+              className="bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 text-base px-8 h-12"
+            >
+              Get Started
+            </Button>
+          </SignUpButton>
+        </SignedOut>
+
+        <SignedIn>
+          <Button
+            size="lg"
+            className="bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 text-base px-8 h-12"
+            asChild
+          >
+            <a href="/dashboard">Start Cooking</a>
+          </Button>
+        </SignedIn>
       </div>
     </div>
   );
