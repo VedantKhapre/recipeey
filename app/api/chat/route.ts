@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { getApiModel, DEFAULT_MODEL } from "@/lib/models";
 
 export const runtime = "edge";
 
@@ -8,7 +9,7 @@ const genAI = new GoogleGenerativeAI(
 
 export async function POST(req: Request) {
   try {
-    const { messages, model = "gemini-1.5-pro" } = await req.json();
+    const { messages, model = DEFAULT_MODEL } = await req.json();
 
     // Get all messages except the last one for history
     const allPreviousMessages = messages.slice(0, -1);
@@ -30,7 +31,7 @@ export async function POST(req: Request) {
 
     // Initialize Gemini model
     const geminiModel = genAI.getGenerativeModel({
-      model: model === "gemini-2.5-flash" ? "gemini-2.5-flash" : "gemini-pro",
+      model: getApiModel(model),
     });
 
     // Start chat with history

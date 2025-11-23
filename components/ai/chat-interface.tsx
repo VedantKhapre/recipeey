@@ -26,6 +26,7 @@ import {
 } from "@/components/ai/prompt-input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { MODELS, DEFAULT_MODEL } from "@/lib/models";
 import { MicIcon, PaperclipIcon, RotateCcwIcon } from "lucide-react";
 import { nanoid } from "nanoid";
 import { type FormEventHandler, useCallback, useState } from "react";
@@ -35,8 +36,6 @@ type ChatMessage = {
   content: string;
   role: "user" | "assistant";
 };
-
-const models = [{ id: "gemini-2.5-flash", name: "Gemini 2.5 Flash" }];
 
 interface ChatInterfaceProps {
   className?: string;
@@ -57,7 +56,7 @@ export function ChatInterface({
   ]);
 
   const [inputValue, setInputValue] = useState("");
-  const [selectedModel, setSelectedModel] = useState(models[0].id);
+  const [selectedModel, setSelectedModel] = useState<string>(DEFAULT_MODEL);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = useCallback(
@@ -175,7 +174,7 @@ export function ChatInterface({
             </div>
             <div className="h-4 w-px bg-border" />
             <span className="text-muted-foreground text-xs">
-              {models.find((m) => m.id === selectedModel)?.name}
+              {MODELS.find((m) => m.id === selectedModel)?.name}
             </span>
           </div>
           <Button
@@ -252,7 +251,7 @@ export function ChatInterface({
                   <PromptInputModelSelectValue />
                 </PromptInputModelSelectTrigger>
                 <PromptInputModelSelectContent>
-                  {models.map((model) => (
+                  {MODELS.map((model) => (
                     <PromptInputModelSelectItem key={model.id} value={model.id}>
                       {model.name}
                     </PromptInputModelSelectItem>
